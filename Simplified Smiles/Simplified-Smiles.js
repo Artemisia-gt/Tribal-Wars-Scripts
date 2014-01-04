@@ -28,7 +28,7 @@ ScriptAPI.register('Simplified Smiles', [8.18], 'Artemisia', 'https://github.com
 /*== lib ==*/
 
 /**
-* 	replace writen smiles within a string with its iconographic representation
+* 	replace smiles within a string with its iconographic representation
 * 	@param		string:String - text to format
 * 	@return		string:String - formated text
 */
