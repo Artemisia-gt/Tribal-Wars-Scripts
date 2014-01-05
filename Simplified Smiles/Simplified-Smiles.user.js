@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name       TribalWars - Simplified Smiles
-// @version    Alpha 1.1
+// @version    1.0
 // @description  Add smiles to your favorite browser game
 // @match      http://*.guerretribale.fr/game.php?*screen=forum*, http://*.tribalwars.net/game.php?*screen=forum*
 // @copyright  2013+, Artemisia
