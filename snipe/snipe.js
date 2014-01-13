@@ -417,7 +417,7 @@ document.getElementById("combined_table").children[0].children[0].children[16 + 
 }
 var txt = '<strong> Village ciblé </strong>
   <input id="vivi" type="text" style="width: 150px" value="' + viviAc + '">
-  <strong> Heure dimpact </strong>
+  <strong> Heure d\'impact </strong>
   <input id="heure" type="text" style="width: 400px" value="' + date + '">
   <a class="btn" href="#" onclick="Generate();">Générer</a>
     ';
@@ -432,3 +432,4 @@ var link = link.substring(0,link.indexOf("&")) + "&mode=combined&group=0&screen=
 window.location = link;
 
   }
+  void(0);
