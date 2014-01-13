@@ -5,8 +5,8 @@ var pos = link.indexOf(".fr");
 var link = link.substring(0,pos);
 var link = link + ".fr/stat.php?mode=settings";
 var xhReq=new XMLHttpRequest();
-    xhReq.open("GET", link, false);
-    xhReq.send(null);
+  xhReq.open("GET", link, false);
+  xhReq.send(null);
 var txt = xhReq.responseText; 
 var txt = txt.substring(txt.indexOf("Vitesse de jeu"), txt.length);
 var pos = txt.indexOf("50%");
@@ -432,4 +432,3 @@ var link = link.substring(0,link.indexOf("&")) + "&mode=combined&group=0&screen=
 window.location = link;
 
   }
-  void(0);
