@@ -1,435 +1,238 @@
-var link = document.URL; 
-var link = link + '';  
-if(link.indexOf("mode=combined")!=-1){
-var pos = link.indexOf(".fr");
-var link = link.substring(0,pos);
-var link = link + ".fr/stat.php?mode=settings";
-var xhReq=new XMLHttpRequest();
-  xhReq.open("GET", link, false);
-  xhReq.send(null);
-var txt = xhReq.responseText; 
-var txt = txt.substring(txt.indexOf("Vitesse de jeu"), txt.length);
-var pos = txt.indexOf("50%");
-var vitesse = txt.indexOf("</td>",pos);
-var speed = txt.substring(pos + 5, vitesse);
-if(speed.indexOf(".")!=-1){
-var speed2 = speed.substring(speed.indexOf(".") + 1 ,speed.length);
-var speed2 = parseInt(speed2);
-var speed2 = speed2 / 10;
-var speed = parseInt(speed);
-var speed = speed + speed2;
-}else{
-var speed = parseInt(speed);
-}
-var txt = txt.substring(txt.indexOf("Vitesse des unités"), txt.length);
-var pos = txt.indexOf("<td>");
-var pos2 = txt.indexOf("</td>",pos);
-var speedU = txt.substring(pos + 4, pos2);
-if(speedU.indexOf(".")!=-1){
-var speedU2 = speedU.substring(speedU.indexOf(".") + 1 ,speedU.length);
-var speedU2 = parseInt(speedU2);
-var speedU2 = speedU2 / 10;
-var speedU = parseInt(speedU);
-var speedU = speedU + speedU2;
-} else {
-var speedU = parseInt(speedU);
-}
-var txt = txt.substring(txt.indexOf("Église"), txt.length);
-var pos = txt.indexOf("<td>");
-var pos2 = txt.indexOf("</td>",pos);
-var Eglise = txt.substring(pos + 4, pos2);
-if(Eglise.indexOf("inactif")!=-1){
-var eglise = false;
-} else {
-var eglise = true;
-}
-var txt = txt.substring(txt.indexOf("Archers"), txt.length);
-var pos = txt.indexOf("50%");
-var pos2 = txt.indexOf("</td>",pos);
-var archer = txt.substring(pos + 5, pos2);
-if(archer.indexOf("inactif")!=-1){
-var archer = false;
-} else {
-var archer = true;
-}
-var txt = txt.substring(txt.indexOf("Paladin"), txt.length);
-var pos = txt.indexOf("<td>");
-var pos2 = txt.indexOf("</td>",pos);
-var paladin = txt.substring(pos + 4, pos2);
-if(paladin.indexOf("inactif")!=-1){
-var palouf = false;
-} else {
-var palouf = true;
-}
-
-var speed = speed * speedU;
-
-if(eglise){
-var q = 1;
-} else {
-var q = 0;
-}
-
-if(archer){
-var nbA = 1;
-} else {
-var nbA = 0;
-}
-if(palouf){
-var nbP = 1;
-} else {
-var nbP = 0;
-}
-var paladin = '';
-
-var guillemet = '"';
-var ap = "'";
-function Generate() {
-
-var d = new Date(document.getElementById('heure').value);
-var e = new Date();
-var f = d-e;
-
-
-var array1 = [];
-var array2 = [];
-
-var viviA = document.getElementById('vivi').value;
-var pos = viviA.indexOf('|' , 0);
-var xA = viviA.substring(pos - 3,pos);
-var yA = viviA.substring(pos + 1,pos + 4);
-var xA = parseInt(xA);
-var yA = parseInt(yA);
-
-var nb = document.getElementById('combined_table').children[0].children[0].children[1].innerHTML;
-var nb = nb.substring( nb.indexOf('(') + 1 , nb.indexOf(')'));
-var nb = parseInt(nb);
-var b = 0;
-for(i = 0; i<nb; i++){
-var source = document.getElementById('combined_table').children[0].children[i + 1].children[1].children[0].children[0].innerHTML;
-var pos = source.indexOf('|' , 0);
-var x = source.substring(pos - 3,pos);
-var y = source.substring(pos + 1,pos + 4);
-var viviD = source.substring(pos-3,pos+4);
-var x = parseInt(x);
-var y = parseInt(y);
-var distance = Math.sqrt((Math.pow(x - xA,2)) + (Math.pow(y - yA,2)));
-var timeS = distance*(1080/speed);
-var timeS = Math.round(timeS);
-var timeP = distance*(1320/speed);
-var timeP = Math.round(timeP);
-
-var timeL = distance*(600/speed);
-var timeL = Math.round(timeL);
-
-var timeH = distance*(660/speed);
-var timeH = Math.round(timeH);
-
-var timeB = distance*(1800/speed);
-var timeB = Math.round(timeB);
-var arrayL = [];
-var lance = document.getElementById('combined_table').children[0].children[i + 1].children[8 + q].innerHTML;
-if(document.getElementById('lance').value == 1 && lance != '0'){
-if(timeS<f/1000 && f>0){
-var g = d.getTime();
-var g = g - (timeS*1000);
-var h = new Date(g);
-var j = h.getTime();
-
-var txt = j + '/3Envoyer ' + lance + ' [unit]spear[/unit] de [coord]' + viviD + '[/coord] vers [coord]'+ viviA + '[/coord] le ' + h;
-array1[b] = txt;
-array2[b] = j;
-b++;
-arrayL[0] = 1;
-}else{
-arrayL[0] = 0;
-}
-} else {
-arrayL[0] = 0;
-}
-var pe = document.getElementById('combined_table').children[0].children[i + 1].children[9 + q].innerHTML;
-if(document.getElementById('pe').value == 1 && pe != '0'){
-if(timeP<f/1000 && f>0){
-var g = d.getTime();
-var g = g - (timeP*1000);
-var h = new Date(g);
-var j = h.getTime();
-
-var txt = j + '/3Envoyer ' + pe + ' [unit]sword[/unit] de [coord]' + viviD + '[/coord] vers [coord]'+ viviA + '[/coord] le ' + h;
-array1[b] = txt;
-array2[b] = j;
-b++;
-arrayL[1] = 1;
-}else{
-arrayL[1] = 0;
-}
-} else {
-arrayL[1] = 0;
-}
-var hache = document.getElementById('combined_table').children[0].children[i + 1].children[10 + q].innerHTML;
-if(document.getElementById('hache').value == 1 && hache != '0'){
-if(timeS<f/1000 && f>0){
-var g = d.getTime();
-var g = g - (timeS*1000);
-var h = new Date(g);
-var j = h.getTime();
-
-var txt = j + '/3Envoyer ' + hache + ' [unit]axe[/unit] de [coord]' + viviD + '[/coord] vers [coord]'+ viviA + '[/coord] le ' + h;
-array1[b] = txt;
-array2[b] = j;
-b++;
-arrayL[2] = 1;
-}else{
-arrayL[2] = 0;
-}
-} else {
-arrayL[2] = 0;
-}
-if(archer){
-var archer = document.getElementById('combined_table').children[0].children[i + 1].children[11 + q].innerHTML;
-if(document.getElementById('archer').value == 1 && archer != '0'){
-if(timeS<f/1000 && f>0){
-var g = d.getTime();
-var g = g - (timeS*1000);
-var h = new Date(g);
-var j = h.getTime();
-
-var txt = j + '/3Envoyer ' + archer + ' [unit]archer[/unit] de [coord]' + viviD + '[/coord] vers [coord]'+ viviA + '[/coord] le ' + h;
-array1[b] = txt;
-array2[b] = j;
-b++;
-arrayL[3] = 1;
-}else{
-arrayL[3] = 0;
-}
-} else {
-arrayL[3] = 0;
-}
-}else{
-arrayL[3] = 0;
-}
-var leger = document.getElementById('combined_table').children[0].children[i + 1].children[12 + nbA + q].innerHTML;
-if(document.getElementById('leger').value == 1 && leger != '0'){
-if(timeL<f/1000 && f>0){
-var g = d.getTime();
-var g = g - (timeL*1000);
-var h = new Date(g);
-var j = h.getTime();
-
-var txt = j + '/3Envoyer ' + leger + ' [unit]light[/unit] de [coord]' + viviD + '[/coord] vers [coord]'+ viviA + '[/coord] le ' + h;
-array1[b] = txt;
-array2[b] = j;
-b++;
-arrayL[4] = 1;
-}else{
-arrayL[4] = 0;
-}
-} else {
-arrayL[4] = 0;
-}
-if(archer){
-var archerM = document.getElementById('combined_table').children[0].children[i + 1].children[12 + nbA + nbA + q].innerHTML;
-if(document.getElementById('archerM').value == 1 && archerM != '0'){
-if(timeL<f/1000 && f>0){
-var g = d.getTime();
-var g = g - (timeL*1000);
-var h = new Date(g);
-var j = h.getTime();
-
-var txt = j + '/3Envoyer ' + archerM + ' [unit]marcher[/unit] de [coord]' + viviD + '[/coord] vers [coord]'+ viviA + '[/coord] le ' + h;
-array1[b] = txt;
-array2[b] = j;
-b++;
-arrayL[5] = 1;
-}else{
-arrayL[5] = 0;
-}
-} else {
-arrayL[5] = 0;
-}
-}else{
-arrayL[5] = 0;
-}
-var lourd = document.getElementById('combined_table').children[0].children[i + 1].children[13 + nbA + nbA + q].innerHTML;
-if(document.getElementById('lourd').value == 1 && lourd != '0'){
-if(timeH<f/1000 && f>0){
-var g = d.getTime();
-var g = g - (timeH*1000);
-var h = new Date(g);
-var j = h.getTime();
-
-var txt = j + '/3Envoyer ' + lourd + ' [unit]heavy[/unit] de [coord]' + viviD + '[/coord] vers [coord]'+ viviA + '[/coord] le ' + h;
-array1[b] = txt;
-array2[b] = j;
-b++;
-arrayL[6] = 1;
-}else{
-arrayL[6] = 0;
-}
-} else {
-arrayL[6] = 0;
-}
-var belier = document.getElementById('combined_table').children[0].children[i + 1].children[14 + nbA + nbA + q].innerHTML;
-if(document.getElementById('belier').value == 1 && belier != '0'){
-if(timeB<f/1000 && f>0){
-var g = d.getTime();
-var g = g - (timeB*1000);
-var h = new Date(g);
-var j = h.getTime();
-
-var txt = j + '/3Envoyer ' + belier + ' [unit]ram[/unit] de [coord]' + viviD + '[/coord] vers [coord]'+ viviA + '[/coord] le ' + h;
-array1[b] = txt;
-array2[b] = j;
-b++;
-arrayL[7] = 1;
-}else{
-arrayL[7] = 0;
-}
-} else {
-arrayL[7] = 0;
-}
-var cata = document.getElementById('combined_table').children[0].children[i + 1].children[15 + nbA + nbA + q].innerHTML;
-if(document.getElementById('cata').value == 1 && cata != '0'){
-if(timeB<f/1000 && f>0){
-var g = d.getTime();
-var g = g - (timeB*1000);
-var h = new Date(g);
-var j = h.getTime();
-
-var txt = j + '/3Envoyer ' + cata + ' [unit]catapult[/unit] de [coord]' + viviD + '[/coord] vers [coord]'+ viviA + '[/coord] le ' + h;
-array1[b] = txt;
-array2[b] = j;
-b++;
-arrayL[8] = 1;
-}else{
-arrayL[8] = 0;
-}} else {
-arrayL[8] = 0;
-}
-if(palouf){
-var palouf = document.getElementById('combined_table').children[0].children[i + 1].children[16 + nbA + nbA + q].innerHTML;
-if(document.getElementById('palouf').value == 1 && palouf != '0'){
-if(timeL<f/1000 && f>0){
-var g = d.getTime();
-var g = g - (timeL*1000);
-var h = new Date(g);
-var j = h.getTime();
-
-var txt = j + '/3Envoyer ' + paladin + ' [unit]knight[/unit] de [coord]' + viviD + '[/coord] vers [coord]'+ viviA + '[/coord] le ' + h;
-array1[b] = txt;
-array2[b] = j;
-b++;
-arrayL[9] = 1;
-}else{
-arrayL[9] = 0;
-}} else {
-arrayL[9] = 0;
-}
-}else{
-arrayL[9] = 0;
-}
-}
-var txtt = '';
-var txtr1 = '';
-var txtr2 = '';
-var txt = '';
-var array3 = [];
- array2.sort(function(a,b){return a-b});
-
-for(i = 0; i<array1.length; i++){
-var txt = array2[i];
-var txt = txt + '';
-for(n = 0; n<array1.length; n++){
-var txt1 = array1[n];
-var txt1 = txt1 + '';
-if(txt1.indexOf(txt)!=-1){
-array1[n] = '';
-var pos = txt1.indexOf('/3');
-var txt1 = txt1.substring(pos + 2, txt1.length);
-var txtt = txtt + txt1 + '\n';
-array3[i] = 1;
-}
-}
-}
-
-
- var source = document.getElementById("paged_view_content").innerHTML;
-
-var txt = '<textarea id="txt" onclick="select();" cols="200" rows="25">' + txtt + '</textarea>';
-var source = txt + source;
-document.getElementById('paged_view_content').innerHTML = source;
-}
-var viviAc = document.getElementById("menu_row2").children[3].children[0].innerHTML;
-
-if(viviAc.indexOf("|")==-1){
-var viviAc = document.getElementById("menu_row2").children[4].children[0].innerHTML;
-}
-if(viviAc.indexOf("|")==-1){
-var viviAc = document.getElementById("menu_row2").children[5].children[0].innerHTML;
-}
-var viviAc = viviAc.substring( viviAc.indexOf('(') + 1 , viviAc.indexOf(')'));
-var date = new Date();
-var source = document.getElementById("combined_table").children[0].children[0].children[8 + q].innerHTML;
-var txt =  '<input id="lance" value="1" type="checkbox" onclick="var source = document.getElementById(' + ap + 'lance' + ap +').value; var source = parseInt(source); var source = source * -1; document.getElementById(' + ap + 'lance' + ap + ').value = source;" checked = "">';
-var source = txt + source;
-document.getElementById("combined_table").children[0].children[0].children[8 + q].innerHTML = source;
-var source = document.getElementById("combined_table").children[0].children[0].children[9 + q].innerHTML;
-var txt =  '<input id="pe" value="1" type="checkbox" onclick="var source = document.getElementById(' + ap + 'pe' + ap +').value; var source = parseInt(source); var source = source * -1; document.getElementById(' + ap + 'pe' + ap + ').value = source;" checked = "">';
-var source = txt + source;
-document.getElementById("combined_table").children[0].children[0].children[9 + q].innerHTML = source;
-var source = document.getElementById("combined_table").children[0].children[0].children[10 + q].innerHTML;
-var txt =  '<input id="hache" value="1" type="checkbox" onclick="var source = document.getElementById(' + ap + 'hache' + ap +').value; var source = parseInt(source); var source = source * -1; document.getElementById(' + ap + 'hache' + ap + ').value = source;" checked = "">';
-var source = txt + source;
-document.getElementById("combined_table").children[0].children[0].children[10 + q].innerHTML = source;
-if(archer){
-var source = document.getElementById("combined_table").children[0].children[0].children[10 + nbA + q].innerHTML;
-var txt =  '<input id="archer" value="1" type="checkbox" onclick="var source = document.getElementById(' + ap + 'archer' + ap +').value; var source = parseInt(source); var source = source * -1; document.getElementById(' + ap + 'archer' + ap + ').value = source;" checked = "">';
-var source = txt + source;
-document.getElementById("combined_table").children[0].children[0].children[10 + nbA + q].innerHTML = source;
-}
-var source = document.getElementById("combined_table").children[0].children[0].children[12 + nbA + q].innerHTML;
-var txt =  '<input id="leger" value="1" type="checkbox" onclick="var source = document.getElementById(' + ap + 'leger' + ap +').value; var source = parseInt(source); var source = source * -1; document.getElementById(' + ap + 'leger' + ap + ').value = source;" checked = "">';
-var source = txt + source;
-document.getElementById("combined_table").children[0].children[0].children[12 + nbA + q].innerHTML = source;
-if(archer){
-var source = document.getElementById("combined_table").children[0].children[0].children[12 + nbA + nbA + q].innerHTML;
-var txt =  '<input id="archerM" value="1" type="checkbox" onclick="var source = document.getElementById(' + ap + 'archerM' + ap +').value; var source = parseInt(source); var source = source * -1; document.getElementById(' + ap + 'archerM' + ap + ').value = source;" checked = "">';
-var source = txt + source;
-document.getElementById("combined_table").children[0].children[0].children[12 + nbA + nbA + q].innerHTML = source;
-}
-var source = document.getElementById("combined_table").children[0].children[0].children[13 + nbA + nbA + q].innerHTML;
-var txt =  '<input id="lourd" value="1" type="checkbox" onclick="var source = document.getElementById(' + ap + 'lourd' + ap +').value; var source = parseInt(source); var source = source * -1; document.getElementById(' + ap + 'lourd' + ap + ').value = source;" checked = "">';
-var source = txt + source;
-document.getElementById("combined_table").children[0].children[0].children[13 + nbA + nbA + q].innerHTML = source;
-var source = document.getElementById("combined_table").children[0].children[0].children[14 + nbA + nbA + q].innerHTML;
-var txt =  '<input id="belier" value="1" type="checkbox" onclick="var source = document.getElementById(' + ap + 'belier' + ap +').value; var source = parseInt(source); var source = source * -1; document.getElementById(' + ap + 'belier' + ap + ').value = source;" checked = "">';
-var source = txt + source;
-document.getElementById("combined_table").children[0].children[0].children[14 + nbA + nbA + q].innerHTML = source;
-var source = document.getElementById("combined_table").children[0].children[0].children[15 + nbA + nbA + q].innerHTML;
-var txt =  '<input id="cata" value="1" type="checkbox" onclick="var source = document.getElementById(' + ap + 'cata' + ap +').value; var source = parseInt(source); var source = source * -1; document.getElementById(' + ap + 'cata' + ap + ').value = source;" checked = "">';
-var source = txt + source;
-document.getElementById("combined_table").children[0].children[0].children[15 + nbA + nbA + q].innerHTML = source;
-if(palouf){
-var source = document.getElementById("combined_table").children[0].children[0].children[16 + nbA + nbA + q].innerHTML;
-var txt =  '<input id="palouf" value="1" type="checkbox" onclick="var source = document.getElementById(' + ap + 'palouf' + ap +').value; var source = parseInt(source); var source = source * -1; document.getElementById(' + ap + 'palouf' + ap + ').value = source;" checked = "">';
-var source = txt + source;
-document.getElementById("combined_table").children[0].children[0].children[16 + nbA + nbA + q].innerHTML = source;
-}
-var txt = '<strong> Village ciblé </strong>
-  <input id="vivi" type="text" style="width: 150px" value="' + viviAc + '">
-  <strong> Heure d\'impact </strong>
-  <input id="heure" type="text" style="width: 400px" value="' + date + '">
-  <a class="btn" href="#" onclick="Generate();">Générer</a>
-    ';
-  var s = document.getElementById("paged_view_content").innerHTML;
-  var s = txt + s;
+/* 
+  Author  : Fluffy88
+  Website : http://fluffy88.com
+  Rewritten by : dalesmckay
   
-  document.getElementById("paged_view_content").innerHTML = s;
+  changelog:
+  *6 Nov 2013 - redirect to combined overview if on another page - cheesasaurus
+  *29 Nov 2013 - removed the old frame setup. Just set win = window.
   
+  TODO: save settings in a cookie
+*/
+
+function fnInjectOverviewBar(){
+  /* Default to your own currently active village */
+  var defaultCoords = fnExtractCoords(win.$("title").html());
   
-  }else{
-var link = link.substring(0,link.indexOf("&")) + "&mode=combined&group=0&screen=overview_villages";
-window.location = link;
+  /* Default to midnight of next day */
+  var defaultDate = new Date();
+  defaultDate.setTime(((Math.floor(defaultDate.getTime()/msPerDay)+1)*minsPerDay + defaultDate.getTimezoneOffset())*msPerMin);
+  defaultDate = defaultDate.toString().replace(/\w+\s*/i,"").replace(/(\d*:\d*:\d*)(.*)/i,"$1");
+  
+  /* Perform the injection */
+  fnInjectUnits();
+  win.$('<tr><td colspan="3">Target Village:<input id="snipe_coord" value="'+defaultCoords+'" class="text-input inactive" size="7" onFocus="this.select()" /></td><td colspan="1">Hit time:<input id="arrival_time" size="25" class="text-input inactive" value="'+defaultDate+'" onFocus="this.select()" /></td><td><input type="button" value="Go" onClick="fnCalculateBackTime()" /></td></tr>').insertAfter(win.$('#menu_row2'));
+  win.$('<div id="snipe_output"><br/><span>Fluffy88\'s Snipe Calculator</span><br/><span><sub>(dalesmckay modification ' + version + ')</sub><hr></span><br/></div>').insertAfter(win.$('body'));
+}
+
+function fnExtractCoords(src){
+  var vv=src.match(/\d+\|\d+/ig);
+  return (vv?vv[vv.length-1]:null);
+}
+
+function fnCalculateDistance(to,from){
+  var target = fnExtractCoords(to).match(/(\d+)\|(\d+)/);
+  var source = fnExtractCoords(from).match(/(\d+)\|(\d+)/);
+  var fields = Math.sqrt(Math.pow(source[1]-target[1],2)+Math.pow(source[2]-target[2],2));
+  
+  return fields;
+}
+
+function fnDebugLog(msg){win.$("body").append("<span>"+msg+"</span><br/>");}
+
+/* sendMethod = "GET" || "POST", params = json, type = xml,json,text */
+function fnAjaxRequest(url,sendMethod,params,type){
+  var error=null,payload=null;
+
+  win.$.ajax({
+    "async":false,
+    "url":url,
+    "data":params,
+    "dataType":type,
+    "type":String(sendMethod||"GET").toUpperCase(),
+    "error":function(req,status,err){error="ajax: " + status;},
+    "success":function(data,status,req){payload=data;}
+  });
+
+  if(error){
+    throw(error);
+  }
+
+  return payload;
+}
+
+function fnCreateConfig(name){return win.$(fnAjaxRequest("/interface.php","GET",{"func":name},"xml")).find("config");}
+function fnCreateUnitConfig(){return fnCreateConfig("get_unit_info");}
+function fnCreateWorldConfig(){return fnCreateConfig("get_config");}
+
+function fnCalculateLaunchTime(source,target,unit,landingTime){
+  var distance = fnCalculateDistance(target,source);
+  var unitSpeed = unitConfig.find(unit+" speed").text();
+
+  /* Convert minutes to milli-seconds */
+  var unitTime = distance*unitSpeed*msPerMin;
+  
+  /* Truncate milli-second portion of the time */
+  var launchTime = new Date();
+  launchTime.setTime(Math.round((landingTime.getTime() - unitTime)/msPerSec)*msPerSec);
+
+  return launchTime;
+}
+
+function fnWriteCookie(ele){
+  var snipeConfig="";
+
+  win.$("#combined_table tr:first th img[src*=unit_]").each(function(i,e){
+    snipeConfig+=win.$("#view_"+e.src.match(/unit\_(.+)\.png?/i)[1]).is(':checked')?"1":"0";
+  });
+
+  var cookie_date=new Date(2099,11,11);
+  win.document.cookie='$snipe='+snipeConfig+';expires='+cookie_date.toGMTString();
+}
+
+function fnInjectUnits(){
+  var twCookie=win.document.cookie.match(/\$snipe\=([0|1]*)/i);
+  if(twCookie){
+    twCookie=twCookie[1];
+    for(var ii=0;ii<twCookie.length;ii++){
+    }
+  }
+
+  win.$("#combined_table tr:first th img[src*=unit_]").each(function(i,e){
+    if(this.parentNode.nodeName=="A")
+    {
+      win.$('<input type="checkbox" '+((!twCookie||(twCookie[i]=="1"))?'checked="true"':'')+' id="view_'+e.src.match(/unit\_(.+)\.png?/i)[1]+'" OnClick="fnWriteCookie(this);"/>').insertBefore(win.$(this.parentNode));
+    }
+    else
+    {
+      win.$('<input type="checkbox" '+((!twCookie||(twCookie[i]=="1"))?'checked="true"':'')+' id="view_'+e.src.match(/unit\_(.+)\.png?/i)[1]+'" OnClick="fnWriteCookie(this);"/>').insertBefore(win.$(this));
+    }
+  });
+  win.$("#combined_table tr:first th:has(img[src*=unit_])").attr("style","background-color:yellow");
+}
+  
+function fnExtractUnits(){
+  var units=[];
+
+  win.$("#combined_table tr:first th img[src*=unit_]").each(function(i,e){
+    units.push(e.src.match(/unit\_(.+)\.png?/i)[1]);
+  });
+  
+  return units;
+}
+  
+function fnCalculateBackTime(){
+  var worldConfig = fnCreateWorldConfig();
+  var hasChurch = worldConfig && parseInt(worldConfig.find("game church").text()||"0", 10);
+  /*var arrivalTime = new Date(win.$("#arrival_time").attr("value").split(":").slice(0,3).join(":"));
+  var target = win.$("#snipe_coord").attr("value");*/
+  var arrivalTime = new Date(document.getElementById("arrival_time").value.split(":").slice(0,3).join(":"));
+  var target = document.getElementById("snipe_coord").value;
+  var servertime = win.$("#serverTime").html().match(/\d+/g);
+  var serverDate = win.$("#serverDate").html().match(/\d+/g);
+  serverTime = new Date(serverDate[1]+"/"+serverDate[0]+"/"+serverDate[2]+" "+servertime.join(":"));
+  var output = [];
+  var ii,troop_count,source,launchTime;
+  var units=fnExtractUnits();
+  
+  /* Loop through your own villages */
+  win.$("#combined_table tr:gt(0)").each(function(i,e){
+    source = fnExtractCoords($(this).find("td:eq(1)").html());    
+    if(source != target){
+      var isVisible = false;
+      
+      /* Process Each Unit */
+      for(ii=0;ii<units.length;ii++){
+        if(win.$("#view_"+units[ii]).is(':checked')){
+          troop_count = parseInt($(this).find("td:eq("+(ii+(hasChurch?9:8))+")").text(),10);
+        
+          /* Do we have Units currently Available */
+          if(troop_count > 0){
+            launchTime=fnCalculateLaunchTime(source,target,units[ii],arrivalTime);
+          
+            /* Cache Units that can reach the target on time */
+            if(launchTime.getTime() > serverTime.getTime()){
+              isVisible = true;
+              output.push([launchTime.getTime(),"Send "+units[ii]+"(" + troop_count + ") from [coord]"+source+"[/coord] to [coord]"+target+"[/coord] at "+launchTime.toString().replace(/(\d*:\d*:\d*)(.*)/i,"$1"),e]);
+            }
+          }
+        }
+      }
+    }
+
+    win.$(e).attr("style","display:"+(isVisible?"table-row":"none"));
+  });
+
+  /* Sort by Launch Time in Ascending Order */    
+  output = output.sort(function(a,b){return (a[0]-b[0]);});
+  for(var qq=0;qq<output.length;qq++){win.$("#combined_table").get(0).tBodies[0].appendChild(output[qq][2]);}
+
+  /* Clear existing messages and display version */
+  var srcHTML = "";
+  srcHTML += "<br/>";
+  srcHTML += "<span>Fluffy88\'s Snipe Calculator</span>";
+  srcHTML += "<br/>";
+  srcHTML += "<span><sub>(dalesmckay modification " + version + ")</sub><hr></span>";
+  srcHTML += "<br/>";
+
+  if(output.length > 0){    
+    srcHTML += "<div align=\"center\"><textarea wrap=\"off\" readonly=\"yes\" cols=\"80\" rows=\"" + (output.length+1) + "\" style=\"width:95%;background-color:transparent;\" onfocus=\"this.select();\">";
+
+    for(ii=0;ii<output.length;ii++){
+      srcHTML += output[ii][1] + "\n";
+    }
+
+    srcHTML += "</textarea></div>";
+  }
+  else{
+    srcHTML += "<span style=\"color:red;\">Impossible to reach on time</span>";
+  }
+
+  srcHTML += "<br/><br/><br/>";
+  
+  win.$("#snipe_output").html("");
+  win.$("#snipe_output").append(win.$(srcHTML));
+}
 
 
-  void(0);
+try{
+  if(game_data.screen == 'overview_villages' && game_data.mode == 'combined')
+  {
+    var author="dalesmckay@gmail.com";
+    var minVer="7.0";
+    //var win=(window.frames.length>0)?window.main:window;
+    var win = window;
+
+    var ver=win.game_data.version.match(/[\d|\.]+/g);
+    if(!ver||(parseFloat(ver[1])<minVer)){
+      alert("This script requires v"+minVer+" or higher.\nYou are running: v"+ver[1]);
+    }
+    else if(win.$("#snipe_output").length <= 0){
+      var msPerSec=1000;
+      var secsPerMin=60;
+      var minsPerHour=60;
+      var hrsPerDay=24;
+      var msPerMin=msPerSec*secsPerMin;
+      var msPerHour=msPerMin*minsPerHour;
+      var msPerDay=msPerHour*hrsPerDay;
+      var minsPerDay=hrsPerDay*minsPerHour;
+
+      var version='v3.2';
+
+      var unitConfig=fnCreateUnitConfig();
+
+      fnInjectOverviewBar();
+    }
+  }
+  else
+  {
+    UI.InfoMessage('Going to the combined overview...', 3000, 'success');
+    window.location = game_data.link_base_pure + 'overview_villages&mode=combined';
+  }
+}
+catch(objError){
+  var dbgMsg="Error: " + String(objError.message||objError);
+  alert(dbgMsg);
+}
+
+void(0);
