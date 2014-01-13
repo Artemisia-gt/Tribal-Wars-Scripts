@@ -427,7 +427,7 @@ var txt = '<strong> Village ciblé </strong>
   document.getElementById("paged_view_content").innerHTML = s;
   
   
-  }else{
+  else{
 var link = link.substring(0,link.indexOf("&")) + "&mode=combined&group=0&screen=overview_villages";
 window.location = link;
 
