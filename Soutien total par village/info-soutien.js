@@ -1,10 +1,11 @@
 
 // @name       TribalWars - Soutien total par village
-// @version    1.0
+// @version    1.5_fr_1.0
 // @description  Ajoute un tableau à l'aperçu troupe > soutien contenant la liste des soutiens triée par village soutenu.
 // @copyright  2013+, Artemisia
 /*== license ==
- *	Copyright (C) 2013+  Artemisia
+ *	Copyright (C) 2013+  Ademes (auteur)
+ *  Copyright (C) 2013+  Artemisia (traduction fr, amélioration, relecture)
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,12 +21,9 @@
     along with this program.  If not, see http://www.gnu.org/licenses/
  
 == script API ==*/
-ScriptAPI.register('Soutien total par village', [8.18], 'Artemisia', 'https://github.com/Artemisia-gt/Tribal-Wars-Scripts');
+ScriptAPI.register('Soutien total par village', [8.18], 'Artemisia & Ademes', 'https://github.com/Artemisia-gt/Tribal-Wars-Scripts');
 
 /*== main ==*/
-var win = typeof(unsafeWindow) != "undefined" ? unsafeWindow : window;
-win.ScriptAPI.register( 'Liste der unterstützten Dörfer in der Truppenübersicht', [8.18], 'Ademes', 'support-nur-im-forum@ademes.at' );
-var Scriptversion = 'MIT-Lizenz - Copyright (c) 2013 Ademes , Version 1.5';
 ads_lduDidT()
 function ads_lduDidT() {
     var doc = document;
