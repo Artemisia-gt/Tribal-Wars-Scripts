@@ -1,1 +1,1 @@
-script="https://raw.github.com/Artemisia-gt/Tribal-Wars-Scripts/master/Battle%20Report%20Enhancer/BRE.js";s=document.createElement("script");s.type="text/javascript";s.src=script+"?"+Math.floor((new Date).valueOf()/6048e5)+3;document.getElementsByTagName("head")[0].appendChild(s);void 0;
+script="https://raw.github.com/Artemisia-gt/Tribal-Wars-Scripts/master/Battle%20Report%20Enhancer/BRE.js";s=document.createElement("script");s.type="text/javascript";s.src=script+"?"+Math.floor((new Date).valueOf()/6048e5)+4;document.getElementsByTagName("head")[0].appendChild(s);void 0;

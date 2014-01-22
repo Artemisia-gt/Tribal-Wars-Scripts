@@ -3782,7 +3782,7 @@ try{
                 cellIndex++;                
                 
                 /*==== timeRemaining cell ====*/                
-                massRenameTable.rows[0].cells[cellIndex].innerHTML = 'time remaining: <span id="twcheese_time_remaining">00:00</span>';
+                massRenameTable.rows[0].cells[cellIndex].innerHTML = 'temps restant :<span id="twcheese_time_remaining">00:00</span>';
                 cellIndex++;            
     }
     
