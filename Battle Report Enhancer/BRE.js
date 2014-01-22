@@ -1,3 +1,4 @@
+
 /*  twcheese_BRE.js
  *  Battle Report Enhancer
  *  version 2.2_10_fr_1.0
@@ -2680,7 +2681,7 @@ try{
                     
                     /*==== defender option ====*/
                     checkboxScript = "document.getElementById('twcheese_reportsFolderDisplay').toggleReportsColumn(6,'defender')";
-                    reportsFolderSettingsTable.rows[5].cells[0].innerHTML += '<input onClick="'+checkboxScript+'" type="checkbox"/>Défenceur';
+                    reportsFolderSettingsTable.rows[5].cells[0].innerHTML += '<input onClick="'+checkboxScript+'" type="checkbox"/>Défenseur';
                     
                     /*==== attackerVillage option ====*/
                     checkboxScript = "document.getElementById('twcheese_reportsFolderDisplay').toggleReportsColumn(7,'attackerVillage')";
