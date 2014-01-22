@@ -1730,7 +1730,7 @@ try{
                 renamerDiv.id = 'twcheese_renamer';
                 renamerDiv.align = 'center';
                     
-                renamerDiv.innerHTML = '<span align="center"><h2>Renommer (bug, diagnostique en cours)</h2></span>';                
+                renamerDiv.innerHTML = '<span align="center"><h2>Renommer</h2></span>';             
                 renamerDiv.innerHTML += 'note <input id="twcheese_note" onkeyup="document.getElementById(\'twcheese_renamer\').previewName();" type="text"/> ';             
                 renamerDiv.innerHTML += '<button onclick="pageMod.renameReport(twcheese_nameReport(twcheese_currentReport,document.getElementById(\'twcheese_note\').value))">rename</button>';
                 renamerDiv.innerHTML += '<input id="twcheese_auto_rename" type="checkbox" onclick="twcheese_BRESettings.autoRename = gameDoc.getElementById(\'twcheese_auto_rename\').checked; twcheese_setBRESettings(twcheese_BRESettings)" />auto rename';
