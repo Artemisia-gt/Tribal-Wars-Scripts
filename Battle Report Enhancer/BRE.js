@@ -2933,15 +2933,15 @@ try{
                 /*==== timeLaunched header ====*/
                 reportsTableHeader.rows[1].appendChild(document.createElement('th'));
                 reportsTableHeader.rows[1].cells[cellIndex].innerHTML = 'Départ';
-                reportsTableHeader.rows[1].cells[cellIndex].style.width = '170px';
-                reportsTableHeader.rows[0].cells[cellIndex-11].style.width = '170px';
+                reportsTableHeader.rows[1].cells[cellIndex].style.width = '150px';
+                reportsTableHeader.rows[0].cells[cellIndex-11].style.width = '150px';
                 cellIndex ++;
                 
                 /*==== timeReceived header ====*/
                 reportsTableHeader.rows[1].appendChild(document.createElement('th'));
                 reportsTableHeader.rows[1].cells[cellIndex].innerHTML = 'Reçu';
-                reportsTableHeader.rows[1].cells[cellIndex].style.width = '120px';
-                reportsTableHeader.rows[0].cells[cellIndex-11].style.width = '120px';
+                reportsTableHeader.rows[1].cells[cellIndex].style.width = '150px';
+                reportsTableHeader.rows[0].cells[cellIndex-11].style.width = '150px';
                 cellIndex ++;           
             
             /*==== reports table body ====*/
