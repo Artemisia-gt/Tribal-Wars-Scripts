@@ -2804,8 +2804,8 @@ try{
                 /*==== repeat links header ====*/
                 reportsTableHeader.rows[1].appendChild(document.createElement('th'));
                 reportsTableHeader.rows[1].cells[cellIndex].innerHTML = 'Réattaquer';
-                reportsTableHeader.rows[1].cells[cellIndex].style.width = '50px';
-                reportsTableHeader.rows[0].cells[cellIndex].style.width = '50px';
+                reportsTableHeader.rows[1].cells[cellIndex].style.width = '70px';
+                reportsTableHeader.rows[0].cells[cellIndex].style.width = '70px';
                 cellIndex ++;
                 
                 /*==== distance header ====*/
