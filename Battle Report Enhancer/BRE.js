@@ -2804,8 +2804,8 @@ try{
                 /*==== repeat links header ====*/
                 reportsTableHeader.rows[1].appendChild(document.createElement('th'));
                 reportsTableHeader.rows[1].cells[cellIndex].innerHTML = 'Réattaquer';
-                reportsTableHeader.rows[1].cells[cellIndex].style.width = '70px';
-                reportsTableHeader.rows[0].cells[cellIndex].style.width = '70px';
+                reportsTableHeader.rows[1].cells[cellIndex].style.width = '75px';
+                reportsTableHeader.rows[0].cells[cellIndex].style.width = '75px';
                 cellIndex ++;
                 
                 /*==== distance header ====*/
@@ -2853,8 +2853,8 @@ try{
                 /*==== target header ====*/
                 reportsTableHeader.rows[1].appendChild(document.createElement('th'));
                 reportsTableHeader.rows[1].cells[cellIndex].innerHTML = 'Destination';
-                reportsTableHeader.rows[1].cells[cellIndex].style.width = '70px';
-                reportsTableHeader.rows[0].cells[cellIndex].style.width = '70px';
+                reportsTableHeader.rows[1].cells[cellIndex].style.width = '75px';
+                reportsTableHeader.rows[0].cells[cellIndex].style.width = '75px';
                 cellIndex ++;
                 
                 /*==== feint header ====*/
@@ -2940,8 +2940,8 @@ try{
                 /*==== timeReceived header ====*/
                 reportsTableHeader.rows[1].appendChild(document.createElement('th'));
                 reportsTableHeader.rows[1].cells[cellIndex].innerHTML = 'Reçu';
-                reportsTableHeader.rows[1].cells[cellIndex].style.width = '140px';
-                reportsTableHeader.rows[0].cells[cellIndex-11].style.width = '140px';
+                reportsTableHeader.rows[1].cells[cellIndex].style.width = '120px';
+                reportsTableHeader.rows[0].cells[cellIndex-11].style.width = '120px';
                 cellIndex ++;           
             
             /*==== reports table body ====*/
