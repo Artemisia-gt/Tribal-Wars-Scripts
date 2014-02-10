@@ -43,11 +43,10 @@ function getStatsUrl(playerId, type) {
     return "http://fr.twstats.com/" + game_data.world + "/image.php?type=playergraph&graph=" + type + "&id=" + playerId;
 }
 
-
 /* Main */
 
 if(game_data.screen != 'info_player') {
-    UI.InfoMessage('Ce script doit être lancé sur le profile d\'un joueur. ,5000,'error');
+    UI.ErrorMessage('Ce script doit être lancé sur le profile d\'un joueur.', 5000);
 }
 
 var points      = getStatsUrl(getPlayerId(), 'points'   );
