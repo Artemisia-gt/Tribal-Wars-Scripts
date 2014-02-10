@@ -51,7 +51,7 @@ twcheese.createNamerGUI = function()
         titleBar.insertRow(-1);
         titleBar.rows[0].insertCell(-1);
         titleBar.rows[0].insertCell(-1);
-        titleBar.rows[0].cells[0].innerHTML = '<b>Renomer Villages</b> (32 caractères maximum)';
+        titleBar.rows[0].cells[0].innerHTML = '<b>Mass Village Renamer</b> (32 caractères maximum)';
         titleBar.rows[0].cells[0].width = '100%';
         titleBar.rows[0].cells[1].innerHTML = '<img src="graphic/delete.png" alt="X"/>';
         titleBar.rows[0].cells[1].style.cursor="pointer";
@@ -339,7 +339,7 @@ twcheese.createNamerGUI = function()
         var preview = document.createElement('span');
         preview.id = 'twcheese_name_preview';
         preview.innerHTML = 'blahblahblah';
-        content.innerHTML = '<b>&nbsp;Example: </b>';
+        content.innerHTML = '<b>&nbsp;Exemple: </b>';
         content.appendChild(preview);
         
         
