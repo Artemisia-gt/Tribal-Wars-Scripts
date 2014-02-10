@@ -46,10 +46,9 @@ function getStatsUrl(playerId, type) {
 
 /* Main */
 
-if(game_data.screen == 'info_player')
-    twcheese.createNamerGUI();
-else
+if(game_data.screen != 'info_player') {
     UI.InfoMessage('Ce script doit être lancé sur le profile d\'un joueur. ,5000,'error');
+}
 
 var points      = getStatsUrl(getPlayerId(), 'points'   );
 var villages    = getStatsUrl(getPlayerId(), 'villages' );
